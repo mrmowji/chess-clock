@@ -1,0 +1,336 @@
+/*************************/
+/***** master styles *****/
+/*************************/
+
+h1, h2, h3, h4, h5, h6,
+p, div, label, input, button {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+html {
+  min-height: 100% !important;
+  position: relative;
+}
+
+/*************************/
+/***** other styles ******/
+/*************************/
+
+#app {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#app > .page {
+  min-height: 100%;
+  margin: 0;
+}
+
+#clock, #clock > .column {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#clock {
+  position: relative;
+}
+
+#clock .timer.ui.dimmer {
+  line-height: normal !important;
+  vertical-align: top !important;
+}
+
+#clock .timer .time {
+  font-size: 8vw;
+  line-height: 100% !important;
+  margin: 0 !important;
+}
+
+#clock .info .name {
+  border: 1px solid black;
+  margin-bottom: 5px;
+}
+
+.ui.white.label, .ui.white.button  {
+  background: white;
+  border: 1px solid #ccc;
+  color: black;
+}
+
+.ui.progress:last-child {
+  margin: 0 !important;
+}
+
+#clock .progress {
+  overflow: hidden;
+}
+
+#clock .progress .bar {
+  border-radius: 0;
+  min-width: 0 !important;
+  transition: width 1s linear, height 1s linear;
+}
+
+#home .logo img {
+  display: block;
+  margin: auto;
+}
+
+#home .title {
+  font-size: 5.6em;
+  line-height: 0.9em;
+  margin: 10px 0;
+  font-weight: 300;
+  white-space: pre-line;
+}
+
+.large.text {
+  font-size: 2rem;
+}
+.hidden {
+  display: none;
+}
+
+.github.star {
+  float: right;
+  height: 20px !important;
+  width: 75px !important;
+}
+
+.mobile.only, .tablet.only {
+  display: none !important;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+@media screen and (orientation: landscape) {
+  .button, .label {
+    font-size: 4vh !important;
+  }
+
+  .button:not(.circular), .label {
+    border-radius: 2vh !important;
+  }
+
+  #home .logo img {
+    width: 20vh;
+  }
+
+  #home .logo, #home .logo + div {
+    display: inline-block !important;
+    vertical-align: bottom;
+  }
+
+  #home .logo + div {
+    margin-left: 4vh;
+    text-align: left;
+  }
+
+  #home .logo + div .title {
+    font-size: 11vh;
+    margin: 3vh 0;
+  }
+
+  #clock .timer {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  #clock .info {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  #clock .progress {
+    position: absolute;
+    right: calc(-50% + 12px);
+    width: 100%;
+    top: 50%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  #clock .progress .bar {
+    width: 100%;
+  }
+
+  #clock .timer:first-child .progress {
+    right: auto;
+    left: 0;
+  }
+
+  #clock .progress.horizontal {
+    display: none;
+  }
+
+  #clock .progress.vertical {
+    display: block;
+    height: 100%;
+    width: 4vh;
+    right: 0;
+    top: 0;
+    transform: rotate(180deg);
+  }
+
+  #clock .progress.vertical .bar {
+    width: 100%;
+    height: auto;
+  }
+
+  #clock .actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 2vh;
+  }
+
+  #clock .actions .button {
+    display: block;
+    margin: 0 !important;
+    margin-bottom: 0.25em !important;
+  }
+
+  #clock .actions .button:first-child {
+    margin-top: 5px !important;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .button, .label {
+    font-size: 3vh !important;
+  }
+
+  .button:not(.circular), .label {
+    border-radius: 2vw !important;
+  }
+
+  #home .logo img {
+    height: 68vw;
+  }
+
+  #home .logo + div .title {
+    font-size: 10vw;
+    margin: 20px auto;
+  }
+
+  #home .logo, #home .logo + div {
+    display: block !important;
+  }
+
+  #home .buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  #home .buttons .button {
+    width: 20%;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  #home .buttons .button.primary {
+    width: 60%;
+  }
+
+  #clock .timer {
+    position: relative;
+    height: 50%;
+  }
+
+  #clock .timer .time {
+    font-size: 18vw;
+  }
+
+  #clock .info {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  #clock .progress {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    height: 4vw;
+  }
+
+  #clock .progress.horizontal {
+    display: block;
+  }
+
+  #clock .progress.vertical {
+    display: none;
+  }
+
+  #clock .progress .bar {
+    height: 100%;
+  }
+
+  #clock .timer:first-child {
+    transform: rotate(180deg);
+  }
+
+  #clock .actions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+    width: 100%;
+    padding: 10px;
+    background: #efefef;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .computer.only {
+    display: initial !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .computer.only {
+    display: none !important;
+  }
+
+  .tablet.only {
+    display: initial !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .computer.only, .tablet.only {
+    display: none !important;
+  }
+
+  .mobile.only {
+    display: initial !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #clock.ui.grid .column {
+    padding: 0 !important;
+  }
+}

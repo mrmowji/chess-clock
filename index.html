@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html manifest="offline.manifest">
+
+<head>
+
+  <title>Chess Clock</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <script src="scripts/vue/vue.js"></script>
+  <script src="scripts/vue/vue-router.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link href="statics/styles/semantic/semantic.css" rel="stylesheet">
+  <link href="statics/styles/app.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <template id="timer">
+    <div class="timer" :class="{ 'ui active dimmer': remainingTimeInSeconds == 0 }">
+      <div class="info">
+        <div class="ui big label name" :class="getNameLabelColor()">
+          <i class="chess king icon"></i>
+          {{ name }}
+        </div>
+        <div class="time ui header">
+          {{ getTimeFromSeconds(remainingTimeInSeconds) }}
+        </div>
+        <div class="ui basic disabled label">
+          {{ getTimeFromSeconds(secondsPassed) }}
+        </div>
+      </div>
+      <div class="ui horizontal progress" :class="(isCurrentPlayer ? 'yellow' : '')">
+        <div class="bar" :style="'width:' + (remainingTimeInSeconds / initialRemainingTimeInSeconds * 100) + '%;'"></div>
+      </div>
+      <div class="ui vertical progress" :class="(isCurrentPlayer ? 'yellow' : '')">
+        <div class="bar" :style="'height:' + (remainingTimeInSeconds / initialRemainingTimeInSeconds * 100) + '%;'"></div>
+      </div>
+    </div>
+  </template>
+
+  <div id="app" class="ui basic segment">
+
+    <div class="ui inverted dimmer" :class="{ active: ! isLoaded }">
+      <div class="ui large text loader"></div>
+    </div>
+
+    <div id="home" class="page ui middle aligned one column grid" v-show="isLoaded && isHomePage">
+      <div class="row">
+        <div class="center aligned column">
+          <div class="logo">
+            <img src="statics/images/logo.png" />
+          </div>
+          <div>
+            <div class="title">CHESS
+              CLOCK
+            </div>
+            <div class="buttons">
+              <button class="ui huge icon button" v-on:click="changePage('settings')">
+                <i class="setting icon"></i>
+              </button
+              ><button class="ui huge primary icon button" v-on:click="changePage('clock')">
+                <i class="chess pawn icon"></i>
+              </button
+              ><button class="ui huge icon button" v-on:click="changePage('about')">
+                <i class="info icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="clock" class="page ui middle aligned one column stackable grid"
+      v-show="isLoaded && (currentPage == 'clock')"
+      v-on:click="switchTurn">
+      <div class="center aligned column">
+        <timer
+          v-bind="blackPlayer"
+          :is-winner="winner === blackPlayer.color"
+          :is-current-player="currentPlayer === blackPlayer.color"
+          :seconds-passed="secondsPassed"
+        ></timer
+        ><timer
+          v-bind="whitePlayer"
+          :is-winner="winner === whitePlayer.color"
+          :is-current-player="currentPlayer === whitePlayer.color"
+          :seconds-passed="secondsPassed"
+        ></timer>
+
+        <div class="actions">
+          <button class="ui primary circular icon button" :class="((state === 'started') ? ('disabled') : (''))" v-on:click.stop="start">
+            <i class="play icon"></i>
+          </button>
+          <button class="ui orange circular icon button" :class="((state !== 'started' || isFinished) ? ('disabled') : (''))" v-on:click.stop="pause">
+            <i class="pause icon"></i>
+          </button>
+          <button class="ui red circular icon button" v-show="state !== 'stopped'" v-on:click.stop="stop">
+            <i class="undo icon"></i>
+          </button>
+          <button class="ui black circular icon button" v-show="state === 'stopped'" v-on:click="changePage('home')">
+            <i class="left arrow icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings" class="page ui middle aligned centered one column stackable grid" v-show="isLoaded && (currentPage == 'settings')">
+      <div class="center aligned column six wide ui text container">
+        <div class="ui basic left aligned padded segment">
+          <h2 class="hi header">
+            Settings
+          </h2>
+          <p>
+            Coming soon!
+          </p>
+        </div>
+        <div class="ui green button" v-on:click="changePage('home')">
+          Go Back
+        </div>
+      </div>
+    </div>
+
+    <div id="about" class="page ui middle aligned centered one column stackable grid" v-show="isLoaded && (currentPage == 'about')">
+      <div class="center aligned column six wide ui text container">
+        <div class="ui basic left aligned padded segment">
+          <h2 class="hi header">
+            About
+          </h2>
+          <p>
+            It's an open source web app developed using
+            <a href="https://github.com/vuejs/vue">Vue.js</a> and
+            <a href="https://github.com/semantic-org/semantic-ui/">Semantic-UI</a>.
+          </p>
+          <p>
+            Logo Design © Copyright 2018 Mojtaba Javan
+          </p>
+          <div class="ui horizontal list">
+            <a href="mailto:javan.mojtaba@gmail.com" class="item">
+              Email
+            </a>
+            <a href="https://www.instagram.com/mrmowji" class="item">
+              Instagram
+            </a>
+            <a href="https://www.linkedin.com/in/mrmowji" class="item">
+              LinkedIn
+            </a>
+            <a href="https://t.me/mrmowji" class="item">
+              Telegram
+            </a>
+          </div>
+        </div>
+        <div class="ui green button" v-on:click="changePage('home')">
+          Go Back
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="scripts/app.js"></script>
+
+</body>
+</html>
